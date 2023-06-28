@@ -31,6 +31,7 @@ export default defineComponent({
             cronometroRodando : false
         }
     },
+    emits: ['aoTemporizadorFinalizado'],
     methods: {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     iniciar() {
@@ -38,8 +39,10 @@ export default defineComponent({
         this.cronometroRodando = true;
     },
     finalizar() {
-        clearInterval(this.refenciaIntervalo);
         this.cronometroRodando = false;
+        clearInterval(this.refenciaIntervalo);
+        this.$emit('aoTemporizadorFinalizado', this.tempoEmSegundos);
+        this.tempoEmSegundos = 0;
     }
 }
 })
